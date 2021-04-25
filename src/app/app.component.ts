@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TitleService } from './title.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'StudentSurvey';
-}
+  constructor(private titleService:TitleService) { }
 
+
+// ngOnInit(): void {
+//   this.titleService.setTitle("Welcome Page")
+//  ;
+// }
+}

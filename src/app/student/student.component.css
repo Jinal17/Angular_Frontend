@@ -1,8 +1,14 @@
-body{
+/* body{
     background-color:white;
+    padding: 20px;
+    box-sizing: border-box;
+    background-size: cover; keyword value
+
+
+
   }
-  
-  h2{
+   */
+  /* h2{
     background-color:#ffcc33;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     box-sizing: border-box;
@@ -11,7 +17,7 @@ body{
   a{
     color:#006633;
   }
-  
+   */
   /*Style for form with a solid border and background color */
   /* .form{
     background-color:whitesmoke;
@@ -98,7 +104,7 @@ body{
     clear: both;
   } */
   
-  #footer {
+  /* #footer {
     
     position: fixed;
     top:550px;
@@ -118,21 +124,21 @@ body{
   }
   
   /*heading inside rectangular box with solid border in GMU green and 5px width*/
-  .container-header {
+  /* .container-header {
     background-color:#006633;
     box-shadow: 5px 10px #ffcc33;
     text-transform:uppercase;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-size:xx-large;
-    padding:5px;
+    padding:10px;
     text-align:center;
     color:white;
     border:5px solid #006633;
-    background-image:url(../../assets/images/Mason.png);
+    /* background-image:url(../../assets/images/Mason.png);
     background-position: right;
     background-repeat: no-repeat;
-    background-size: contain;
-  }
+    background-size: contain; */
+  /* } */ 
   /*Navigation link list */
   /* .nav li a {
     display: block;

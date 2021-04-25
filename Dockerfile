@@ -1,36 +1,56 @@
-# base image
-FROM node:12.2.0
-
-# set working directory
+# build
+FROM node:12.7-alpine AS build-step
 WORKDIR /app
-
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-
-# install and cache app dependencies
-COPY package.json /app/package.json
+COPY package*.json ./
 RUN npm install
+COPY . .
+
+# RUN npm run build
 RUN npm install -g @angular/cli@7.3.9
 
-# add app
-COPY . /app
+ARG configuration=production
+RUN npm run build -- --output-path=./dist/out --configuration $configuration
 
-# start app
-CMD ng serve --host 0.0.0.0 --disableHostCheck true 
-EXPOSE 4200
+# run
+FROM node:12.7-alpine
+COPY --from=build-step /app/dist/out/ /usr/share/nginx/html
+COPY --from=build-step /app/nginx.conf /etc/nginx/conf.d/default.conf
 
-### STAGE 1: Build ###
-#FROM node:12.7-alpine AS build
-#WORKDIR /usr/src/app
-#COPY . ./
-#RUN npm install
-#RUN npm install -g @angular/cli 
-#RUN npm run build
+# COPY nginx.conf /etc/nginx/nginx.conf
 
-### STAGE 2: Run ###
 
-#COPY . /usr/src/app
-#COPY  ng serve --host 0.0.0.0 --disableHostCheck true
+# FROM node:12.16.2-alpine3.9 AS build-step
+# WORKDIR /app
 
-#EXPOSE 8080
-#EXPOSE 4200
+# ENV PATH /app/node_modules/.bin:$PATH
+
+# COPY package.json ./
+# RUN npm install
+# RUN npm install -g @angular/cli@7.3.9
+
+# COPY . .
+# RUN npm run build
+# CMD ng serve --host 0.0.0.0 --disableHostCheck true 
+# EXPOSE 4200
+
+# # base image
+# FROM node:12.2.0
+
+# # set working directory
+# WORKDIR /app
+
+# # add `/app/node_modules/.bin` to $PATH
+# ENV PATH /app/node_modules/.bin:$PATH
+
+# # install and cache app dependencies
+# COPY package.json /app/package.json
+# RUN npm install
+# RUN npm install -g @angular/cli@7.3.9
+
+# # add app
+# COPY . /app
+
+# # start app
+# CMD ng serve --host 0.0.0.0 --disableHostCheck true 
+# EXPOSE 4200
+
