@@ -22,7 +22,6 @@
         </thead>
         <tbody>
           <tr *ngFor="let student of students | async">
-            console.log(student)
             <td>{{student.name}}</td>
             <td>{{student.lastname}}</td>
             <td>{{student.address}}</td>
