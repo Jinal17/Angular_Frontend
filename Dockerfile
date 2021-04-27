@@ -1,11 +1,12 @@
 # build
-FROM node:12.7-alpine AS build-step
+# FROM node:12.7-alpine AS build-step
+FROM node:12.16.2-alpine3.9 AS build-step
+
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
 
-# RUN npm run build
 RUN npm install -g @angular/cli@7.3.9
 
 ARG configuration=production
@@ -13,7 +14,9 @@ RUN npm run build -- --output-path=./dist/out --configuration $configuration
 
 # run
 FROM nginx:1.16.1-alpine
-COPY --from=build-step /app/dist/out/ /usr/share/nginx/html
+COPY --from=build-step /app/dist/out/ /usr/share/nginx/html/
+# COPY --from=build-step /app/dist/SWE645_Frontend /usr/share/nginx/html/
+
 # COPY --from=build-step /app/nginx.conf /etc/nginx/conf.d/default.conf
 
 
