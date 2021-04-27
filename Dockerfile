@@ -12,9 +12,15 @@ ARG configuration=production
 RUN npm run build -- --output-path=./dist/out --configuration $configuration
 
 # run
-FROM node:12.7-alpine
+FROM nginx:1.16.1-alpine
 COPY --from=build-step /app/dist/out/ /usr/share/nginx/html
-COPY --from=build-step /app/nginx.conf /etc/nginx/conf.d/default.conf
+# COPY --from=build-step /app/nginx.conf /etc/nginx/conf.d/default.conf
+
+
+CMD ng serve --host 0.0.0.0 --disableHostCheck true 
+EXPOSE 53812
+
+
 
 # COPY nginx.conf /etc/nginx/nginx.conf
 
