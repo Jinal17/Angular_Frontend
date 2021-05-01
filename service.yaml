@@ -7,8 +7,8 @@ spec:
   type: LoadBalancer
   ports:
   # - port: 53812
-  - port: 53812
-    targetPort: 53812
+  - port: 80
+    targetPort: 80
   
   selector:
     app: angular-hw4

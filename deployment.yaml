@@ -17,10 +17,10 @@ spec:
     spec:
       containers:
         - name: angular-hw4
-          image: angeela/angular-hw4:5
+          image: angeela/angular-hw4:6
           imagePullPolicy: Always
           ports:
-          - containerPort: 53812
+          - containerPort: 80
           # - containerPort: 53812
 
           # Just spin & wait forever

@@ -16,8 +16,6 @@ export class StudentService {
   //https://cors-anywhere.herokuapp.com/
   constructor(private http: HttpClient) { }
 
-
-  
   getStudent(): Observable<Student[]> {
     return this.http.get<Student[]>(this.baseUrl1).pipe(catchError(this.handleError))
   }

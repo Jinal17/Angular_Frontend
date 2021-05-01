@@ -5,7 +5,7 @@ FROM node:12.16.2-alpine3.9 AS build-step
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
-COPY . .
+COPY ./ /app/
 
 RUN npm install -g @angular/cli@7.3.9
 
@@ -15,13 +15,15 @@ RUN npm run build -- --output-path=./dist/out --configuration $configuration
 # run
 FROM nginx:1.16.1-alpine
 COPY --from=build-step /app/dist/out/ /usr/share/nginx/html/
+#Copy default nginx configuration
+COPY nginx-custom.conf /etc/nginx/conf.d/default.conf
 # COPY --from=build-step /app/dist/SWE645_Frontend /usr/share/nginx/html/
 
 # COPY --from=build-step /app/nginx.conf /etc/nginx/conf.d/default.conf
 
 
-CMD ng serve --host 0.0.0.0 --disableHostCheck true 
-EXPOSE 53812
+# CMD ng serve --host 0.0.0.0 --disableHostCheck true 
+# EXPOSE 53812
 
 
 
